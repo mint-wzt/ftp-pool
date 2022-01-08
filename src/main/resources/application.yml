@@ -1,0 +1,40 @@
+# FTP配置
+ftp:
+  host: host
+  port: 21
+  username: username
+  password: password
+  filePath: /home/ftpuser/photo # 保存数据文件的目录
+  uploadSleep: 100 #文件上传失败下次超时重试时间 单位ms
+  uploadRetry: 0 #文件上传失败重试次数
+  localPath: D:\photo #本地用于保存临时文件
+  filePrefix: test_ # 推送文件前缀
+  connectTimeout: 10000 #连接超时时间(默认0 表示一直连接)
+  dataTimeout: 10000 #数据传输超时时间（下载）设置soTimeout
+  soTimeout: 10000 #数据传输超时时间（下载）设置soTimeout 会覆盖dataTime参数
+  controlEncoding: UTF-8 #编码格式 可用于处理文件名中文乱码的问题
+  bufferSize: 524288 #缓冲器大小 0.5MB = 1024 * 1024 * 0.5
+  passiveMode: true #每次数据连接之前，ftp client告诉ftp server开通一个端口来传输数据
+  controlKeepAliveTimeout: 3 #客户端发送控制命令时间间隔（上传或者下载文件过程中）单位：秒（s）
+  controlKeepAliveReplyTimeout: 10000 #客户端（发送控制命令后）接收服务端的超时时间（上传或者下载文件过程中）单位：毫秒（ms）
+
+#FTP连接池配置
+ftp-pool:
+  maxTotal: 20 #最大数
+  minIdle: 0 #最小空闲数
+  maxIdle: 20 #最大空闲数
+  maxWait: -1 #最大等待时间 maxWait<0时一直等待
+  blockWhenExhausted: true #池对象耗尽之后是否阻塞
+  testOnBorrow: true #取对象验证
+  testOnReturn: true #回收验证
+  testOnCreate: true #创建时验证
+  testWhileIdle: true #空闲验证
+  lifo: false #后进先出
+  minEvictableIdleTimeMillis: 600000 #默认30分钟1800000连接空闲的最小时间，达到此值后空闲连接将可能会被移除。
+  softMinEvictableIdleTimeMillis: 600000 #连接空闲的最小时间，达到此值后空闲链接将会被移除，且保留minIdle个空闲连接数。默认为-1.
+  timeBetweenEvictionRunsMillis: 30000 #每30秒运行一次维护任务
+  removeAbandonedOnBorrow: true #获取连接池对象时移除长时间为归还连接池的对象
+  removeAbandonedOnMaintenance: true #维护并移除长时间为归还连接池的对象
+  removeAbandonedTimeout: 300 #如果一个对象borrow之后300秒还没有返还给pool，认为是泄漏的对象 默认300秒
+
+
